@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -11,9 +12,10 @@ import java.io.IOException;
  */
 public class Main {
 
-    final static int MAX = 20;
+    final static int MAX = 1000;
     final static int MAX_IN_LINE = 15;
     final static int MAX_LENGTH = getNumberOfDigits(MAX);
+    final static boolean WRITE_TO_FILE = false;
 
     private static int getNumberOfDigits(int n) {
         int nd = 0;
@@ -24,34 +26,47 @@ public class Main {
         return nd;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws Exception {
-        try {
-            FileWriter fw = new FileWriter("output/integers.txt");
-            fw.write("Data written to file");
-            fw.close();
-
-            for (int i = 1; i < MAX; i++) {
-                fw.write(i);
-                if (i < MAX - 1) {
-                    System.out.print(", ");
-                }
-                if (getNumberOfDigits(i) < MAX_LENGTH) {
-                    for (int j = 0; j < MAX_LENGTH - getNumberOfDigits(i); j++) {
-                        System.out.print(" ");
-                    }
-                }
-                if (i % MAX_IN_LINE == 0) {
-                    System.out.print("\n");
-                }
+    private static void printIntegers(ArrayList<Integer> list) {
+        String output = "";
+        for (int i = 0; i <list.size(); i++) {
+            output += Integer.toString(list.get(i));
+            if (i < MAX) {
+                output += ", ";
             }
-            System.out.print("\n");
-        } catch (IOException ex) {
-            System.out.println("File not found");
-            System.out.println(ex.getMessage());
+            for (int j = 0; j < MAX_LENGTH - getNumberOfDigits(i); j++) {
+                output += " ";
+            }
+            if (i % MAX_IN_LINE == 0) {
+                output += "\n";
+            }
+        }
+        output += "\n";
+        if (WRITE_TO_FILE) {
+            try (FileWriter fw = new FileWriter("output/integers.txt");) {
+                fw.write(output);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        } else {
+            System.out.print(output);
         }
     }
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        //Integers
+        ArrayList<Integer> list=new ArrayList<>();
+        for (int i = 1; i <= MAX; i++) {
+            list.add(i);
+        }
+        printIntegers(list);
+        //Squares
+        list.clear();
+        for (int i = 1; i*i <= MAX; i++) {
+            list.add(i*i);
+        }
+        printIntegers(list);
+    }
 }
