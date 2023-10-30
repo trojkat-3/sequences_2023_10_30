@@ -1,21 +1,16 @@
 package sequences_10_30;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
-/**
- *
- * @author xenon
- */
 public class Main {
 
     final static int MAX = 1000;
     final static int MAX_IN_LINE = 15;
     final static int MAX_LENGTH = getNumberOfDigits(MAX);
-    final static boolean WRITE_TO_FILE = false;
+    final static boolean WRITE_TO_FILE = true;
 
     private static int getNumberOfDigits(int n) {
         int nd = 0;
@@ -29,14 +24,16 @@ public class Main {
     private static void printIntegers(ArrayList<Integer> list) {
         String output = "";
         for (int i = 0; i <list.size(); i++) {
-            output += Integer.toString(list.get(i));
+            int n=list.get(i);
+            output += Integer.toString(n);
             if (i < MAX) {
                 output += ", ";
             }
-            for (int j = 0; j < MAX_LENGTH - getNumberOfDigits(i); j++) {
+            int maxLength=getNumberOfDigits(Collections.max(list));
+            for (int j = 0; j < maxLength - getNumberOfDigits(n); j++) {
                 output += " ";
             }
-            if (i % MAX_IN_LINE == 0) {
+            if ((i+1) % MAX_IN_LINE == 0) {
                 output += "\n";
             }
         }
@@ -57,7 +54,7 @@ public class Main {
      */
     public static void main(String[] args) {
         //Integers
-        ArrayList<Integer> list=new ArrayList<>();
+        ArrayList<Integer> list=new ArrayList();
         for (int i = 1; i <= MAX; i++) {
             list.add(i);
         }
