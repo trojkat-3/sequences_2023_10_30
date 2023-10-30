@@ -7,10 +7,18 @@ import java.util.Collections;
 
 
 public class IntegersPrinter {
-    final static int MAX_IN_LINE = 15;
-    final static boolean WRITE_TO_FILE = true;
+    private final static int MAX_IN_LINE = 15;
+    private final static boolean WRITE_TO_FILE = true;
+    String filename;
     
-     private static int getNumberOfDigits(int n) {
+    public IntegersPrinter(){
+        this.filename=null;
+    }
+    public IntegersPrinter(String filename){
+        this.filename=filename;
+    }
+    
+     private int getNumberOfDigits(int n) {
         int nd = 0;
         while (n > 0) {
             nd++;
@@ -19,7 +27,7 @@ public class IntegersPrinter {
         return nd;
     }
 
-    public static void printIntegers(ArrayList<Integer> list) {
+    public void printIntegers(ArrayList<Integer> list) {
         String output = "";
         for (int i = 0; i <list.size(); i++) {
             int n=list.get(i);
@@ -36,8 +44,8 @@ public class IntegersPrinter {
             }
         }
         output += "\n";
-        if (WRITE_TO_FILE) {
-            try (FileWriter fw = new FileWriter("output/integers.txt");) {
+        if (filename!=null) {
+            try (FileWriter fw = new FileWriter("output/"+filename);) {
                 fw.write(output);
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());

@@ -11,18 +11,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        IntegersPrinter printerStdOut=new IntegersPrinter();
+        IntegersPrinter printerFile=new IntegersPrinter("integers.txt");
         //Integers
         ArrayList<Integer> list=new ArrayList();
         for (int i = 1; i <= MAX; i++) {
             list.add(i);
         }
-        IntegersPrinter.printIntegers(list);
+        printerStdOut.printIntegers(list);
         //Squares
         list.clear();
         for (int i = 1; i*i <= MAX; i++) {
             list.add(i*i);
         }
-        IntegersPrinter.printIntegers(list);
+        printerFile.printIntegers(list);
     }
 }
 
