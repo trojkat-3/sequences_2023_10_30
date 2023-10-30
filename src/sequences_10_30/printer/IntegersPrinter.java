@@ -8,7 +8,6 @@ import java.util.Collections;
 
 public class IntegersPrinter {
     private final static int MAX_IN_LINE = 15;
-    private final static boolean WRITE_TO_FILE = true;
     String filename;
     
     public IntegersPrinter(){
