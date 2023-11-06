@@ -5,7 +5,7 @@ import sequences_10_30.printer.IntegersPrinter;
 
 public class Main {
 
-    final static int MAX = 10000;
+    final static int MAX = 1000;
 
     private static boolean isPrime(int n) {
         if (n < 2) {
@@ -40,13 +40,15 @@ public class Main {
         for (int i = 1; i <= MAX; i++) {
             list.add(i);
         }
-        printerStdOut.printIntegers(list);
+        printerStdOut.print(list, "Integers");
+        printerFile.print(list, "Integers");
         //Squares
         list.clear();
         for (int i = 1; i * i <= MAX; i++) {
             list.add(i * i);
         }
-        printerFile.printIntegers(list);
+        printerStdOut.print(list, "Squares");
+        printerFile.print(list, "Squares");
         list.clear();
         //Primes
         for (int i = 1; i <= MAX; i++) {
@@ -54,7 +56,8 @@ public class Main {
                 list.add(i);
             }
         }
-        printerStdOut.printIntegers(list);
+        printerStdOut.print(list, "Primes");
+        printerFile.print(list, "Primes");
         //Fibonacci
         list.clear();
         int i=0;
@@ -63,7 +66,8 @@ public class Main {
             list.add(fib);
             i++;
         }
-        printerFile.printIntegers(list);
+        printerStdOut.print(list, "Fibonacci numbers");
+        printerFile.print(list, "Fibonacci numbers");
         
     }
 }
