@@ -11,6 +11,11 @@ public class Arithmetic extends Sequence {
     }
     
     @Override
+    public int getSum(int n){
+        return (2*a1+(n-1)*diff)*n/2;
+    }
+    
+    @Override
     void initialize() {
         int an;
         int n=1;

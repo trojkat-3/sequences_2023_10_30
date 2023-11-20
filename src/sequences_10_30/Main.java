@@ -32,9 +32,13 @@ public class Main {
         printerStdOut.print(sq);
         printerFile.print(sq);
         
+        System.out.println("SUM: "+ sq.getSum(4));
+        
         sq=new Arithmetic(1,3);
         printerStdOut.print(sq);
         printerFile.print(sq);
+        
+        System.out.println("SUM: "+ sq.getSum(4));
       
         //Squares
         sq=new Squares();

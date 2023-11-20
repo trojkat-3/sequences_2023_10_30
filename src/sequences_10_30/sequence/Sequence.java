@@ -12,6 +12,19 @@ abstract public class Sequence {
         this.name=name;
     }
     
+    /**
+     * Compute the sum of n initial elements in the sequence
+     * @param n ...
+     * @return sum of n initial elements
+     */
+    public int getSum(int n){
+        int sum=0;
+        for (int i=0;i<n;i++){
+            sum+=sequence.get(i);
+        }
+        return sum;
+    }
+    
     public void setMax(int max){
         this.max=max;
         sequence.clear();
