@@ -26,6 +26,10 @@ public class Main {
         Sequence sq=new Integers();
         printerStdOut.print(sq);
         printerFile.print(sq);
+        
+        sq=new Fibonacci(1,3);
+        printerStdOut.print(sq);
+        printerFile.print(sq);
       
         //Squares
         sq=new Squares();
