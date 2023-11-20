@@ -2,6 +2,7 @@ package sequences_10_30;
 
 import java.util.ArrayList;
 import sequences_10_30.printer.IntegersPrinter;
+import sequences_10_30.sequence.Arithmetic;
 import sequences_10_30.sequence.Fibonacci;
 import sequences_10_30.sequence.Integers;
 import sequences_10_30.sequence.Primes;
@@ -28,6 +29,10 @@ public class Main {
         printerFile.print(sq);
         
         sq=new Fibonacci(1,3);
+        printerStdOut.print(sq);
+        printerFile.print(sq);
+        
+        sq=new Arithmetic(1,3);
         printerStdOut.print(sq);
         printerFile.print(sq);
       
