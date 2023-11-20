@@ -12,6 +12,12 @@ abstract public class Sequence {
         this.name=name;
     }
     
+    public void setMax(int max){
+        this.max=max;
+        sequence.clear();
+        initialize();
+    }
+    
     public ArrayList<Integer> getSequence(){
         return sequence;
     }
@@ -22,7 +28,7 @@ abstract public class Sequence {
 
     @Override
     public String toString() {
-        return "Sequence: "+name+" ["+max+"]";
+        return "Sequence: "+name+" [max: "+max+"]";
     }
     
     abstract void initialize();

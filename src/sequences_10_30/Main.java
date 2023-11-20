@@ -34,6 +34,7 @@ public class Main {
         
         //Primes
         sq=new Primes();
+        sq.setMax(10000);
         printerStdOut.print(sq);
         printerFile.print(sq);
         
