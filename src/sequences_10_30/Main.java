@@ -2,8 +2,11 @@ package sequences_10_30;
 
 import java.util.ArrayList;
 import sequences_10_30.printer.IntegersPrinter;
+import sequences_10_30.sequence.Fibonacci;
 import sequences_10_30.sequence.Integers;
+import sequences_10_30.sequence.Primes;
 import sequences_10_30.sequence.Sequence;
+import sequences_10_30.sequence.Squares;
 
 public class Main {
 
@@ -18,29 +21,26 @@ public class Main {
     public static void main(String[] args) {
         IntegersPrinter printerStdOut = new IntegersPrinter();
         IntegersPrinter printerFile = new IntegersPrinter("integers.txt");
-        
-
 
         //Integers
-        
-       
-        printerStdOut.print(list, "Integers");
-        printerFile.print(list, "Integers");
+        Sequence sq=new Integers();
+        printerStdOut.print(sq);
+        printerFile.print(sq);
+      
         //Squares
-        list.clear();
+        sq=new Squares();
+        printerStdOut.print(sq);
+        printerFile.print(sq);
         
-        printerStdOut.print(list, "Squares");
-        printerFile.print(list, "Squares");
-        list.clear();
         //Primes
+        sq=new Primes();
+        printerStdOut.print(sq);
+        printerFile.print(sq);
         
-        printerStdOut.print(list, "Primes");
-        printerFile.print(list, "Primes");
         //Fibonacci
-        list.clear();
-        
-        printerStdOut.print(list, "Fibonacci numbers");
-        printerFile.print(list, "Fibonacci numbers");
+        sq=new Fibonacci();
+        printerStdOut.print(sq);
+        printerFile.print(sq);
         
     }
 }

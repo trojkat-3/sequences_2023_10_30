@@ -4,6 +4,7 @@ public class Squares extends Sequence{
     
     public Squares(){
         super("Squares");
+        initialize();
     }
 
     @Override

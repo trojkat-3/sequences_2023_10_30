@@ -11,6 +11,10 @@ abstract public class Sequence {
     public Sequence(String name){
         this.name=name;
     }
+    
+    public ArrayList<Integer> getSequence(){
+        return sequence;
+    }
 
     public String getName() {
         return name;
