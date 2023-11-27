@@ -37,7 +37,7 @@ public class Main {
 
             System.out.println("SUM: " + sq.getSum(4));
         } catch (OutOfBoundsException ex) {
-            
+            System.out.println(ex.getMessage());
         }
 
         //Squares

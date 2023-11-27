@@ -1,6 +1,7 @@
 package sequences_10_30.sequence;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import sequences_10_30.exceptions.OutOfBoundsException;
 
 abstract public class Sequence {
@@ -30,6 +31,23 @@ abstract public class Sequence {
             sum+=sequence.get(i);
         }
         return sum;
+    }
+    
+    public ArrayList<Integer> decompose(int n){
+        ArrayList<Integer> ret=new ArrayList<>();
+        ArrayList<Integer> list=new ArrayList<>(sequence); //shallow copy
+        Collections.sort(list, Collections.reverseOrder());
+        
+        int i=0;
+        while(n>0){
+            if (list.get(i) <= n){
+                ret.add(list.get(i));
+                n-=list.get(i);
+            }else {
+                i++;
+            }
+        }
+        return ret;
     }
     
     public void setMax(int max){
