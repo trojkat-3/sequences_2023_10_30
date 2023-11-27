@@ -16,6 +16,7 @@ abstract public class Sequence {
      * Compute the sum of n initial elements in the sequence
      * @param n ...
      * @return sum of n initial elements
+     * @throws java.lang.Exception
      */
     public int getSum(int n) throws Exception {
         if (n>sequence.size()){
