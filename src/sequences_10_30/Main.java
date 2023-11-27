@@ -44,15 +44,19 @@ public class Main {
         sq = new Squares();
         printerStdOut.print(sq);
         printerFile.print(sq);
+        
+        System.out.println(sq.decompose(666));
 
         //Primes
         sq = new Primes();
         sq.setMax(10000);
+        System.out.println(sq.decompose(30));
         printerStdOut.print(sq);
         printerFile.print(sq);
 
         //Fibonacci
         sq = new Fibonacci();
+        System.out.println(sq.decompose(666));
         printerStdOut.print(sq);
         printerFile.print(sq);
 
