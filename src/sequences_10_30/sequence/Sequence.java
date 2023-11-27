@@ -17,7 +17,10 @@ abstract public class Sequence {
      * @param n ...
      * @return sum of n initial elements
      */
-    public int getSum(int n){
+    public int getSum(int n) throws Exception {
+        if (n>sequence.size()){
+            throw new Exception("Too large n in sum function.");
+        }
         int sum=0;
         for (int i=0;i<n;i++){
             sum+=sequence.get(i);

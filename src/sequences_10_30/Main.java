@@ -11,11 +11,6 @@ import sequences_10_30.sequence.Squares;
 
 public class Main {
 
-
-
-    
-   
-
     /**
      * @param args the command line arguments
      */
@@ -24,45 +19,41 @@ public class Main {
         IntegersPrinter printerFile = new IntegersPrinter("integers.txt");
 
         //Integers
-        Sequence sq=new Integers();
+        Sequence sq = new Integers();
         printerStdOut.print(sq);
         printerFile.print(sq);
-        
-        sq=new Fibonacci(1,3);
+
+        sq = new Fibonacci(1, 3);
         printerStdOut.print(sq);
         printerFile.print(sq);
-        
-        System.out.println("SUM: "+ sq.getSum(4));
-        
-        sq=new Arithmetic(1,3);
-        printerStdOut.print(sq);
-        printerFile.print(sq);
-        
-        System.out.println("SUM: "+ sq.getSum(4));
-      
+
+        try {
+            System.out.println("SUM: " + sq.getSum(40));
+
+            sq = new Arithmetic(1, 3);
+            printerStdOut.print(sq);
+            printerFile.print(sq);
+
+            System.out.println("SUM: " + sq.getSum(4));
+        } catch (Exception ex) {
+
+        }
+
         //Squares
-        sq=new Squares();
+        sq = new Squares();
         printerStdOut.print(sq);
         printerFile.print(sq);
-        
+
         //Primes
-        sq=new Primes();
+        sq = new Primes();
         sq.setMax(10000);
         printerStdOut.print(sq);
         printerFile.print(sq);
-        
+
         //Fibonacci
-        sq=new Fibonacci();
+        sq = new Fibonacci();
         printerStdOut.print(sq);
         printerFile.print(sq);
-        
+
     }
 }
-
-
-
-
-
-
-
-
