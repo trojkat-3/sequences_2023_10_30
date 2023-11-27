@@ -17,9 +17,9 @@ abstract public class Sequence {
      * Compute the sum of n initial elements in the sequence
      * @param n ...
      * @return sum of n initial elements
-     * @throws java.lang.Exception
+     * @throws OutOfBoundsException
      */
-    public int getSum(int n) throws Exception {
+    public int getSum(int n) throws OutOfBoundsException {
         if (n>sequence.size()){
             throw new OutOfBoundsException("In the sum function for "
                     +name+" sequence max="

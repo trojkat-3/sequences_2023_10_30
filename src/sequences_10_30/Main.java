@@ -1,6 +1,7 @@
 package sequences_10_30;
 
 import java.util.ArrayList;
+import sequences_10_30.exceptions.OutOfBoundsException;
 import sequences_10_30.printer.IntegersPrinter;
 import sequences_10_30.sequence.Arithmetic;
 import sequences_10_30.sequence.Fibonacci;
@@ -35,8 +36,8 @@ public class Main {
             printerFile.print(sq);
 
             System.out.println("SUM: " + sq.getSum(4));
-        } catch (Exception ex) {
-
+        } catch (OutOfBoundsException ex) {
+            
         }
 
         //Squares
