@@ -1,8 +1,10 @@
 package sequences_10_30;
 
-import java.util.ArrayList;
+import sequences_10_30.exceptions.CantDecomposeException;
 import sequences_10_30.exceptions.OutOfBoundsException;
-import sequences_10_30.printer.IntegersPrinter;
+import sequences_10_30.printer.Printer;
+import sequences_10_30.printer.PrinterFile;
+import sequences_10_30.printer.PrinterStdOut;
 import sequences_10_30.sequence.Arithmetic;
 import sequences_10_30.sequence.Fibonacci;
 import sequences_10_30.sequence.Integers;
@@ -16,8 +18,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IntegersPrinter printerStdOut = new IntegersPrinter();
-        IntegersPrinter printerFile = new IntegersPrinter("integers.txt");
+        Printer printerStdOut = new PrinterStdOut();
+        Printer printerFile = new PrinterFile("integers.txt");
 
         //Integers
         Sequence sq = new Integers();
@@ -44,21 +46,27 @@ public class Main {
         sq = new Squares();
         printerStdOut.print(sq);
         printerFile.print(sq);
-        
-        System.out.println(sq.decompose(666));
+        try {
+            System.out.println(sq.decompose(666));
 
-        //Primes
-        sq = new Primes();
-        sq.setMax(10000);
-        System.out.println(sq.decompose(30));
-        printerStdOut.print(sq);
-        printerFile.print(sq);
+            //Primes
+            sq = new Primes();
+            sq.setMax(10000);
+            System.out.println(sq.decompose(30));
+            printerStdOut.print(sq);
+            printerFile.print(sq);
 
-        //Fibonacci
-        sq = new Fibonacci();
-        System.out.println(sq.decompose(666));
+            //Fibonacci
+            sq = new Fibonacci();
+            System.out.println(sq.decompose(666));
+            printerStdOut.print(sq);
+            printerFile.print(sq);
+        } catch (CantDecomposeException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        sq = new Squares();
         printerStdOut.print(sq);
-        printerFile.print(sq);
 
     }
 }
