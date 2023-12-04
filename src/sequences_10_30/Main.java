@@ -2,6 +2,7 @@ package sequences_10_30;
 
 import sequences_10_30.exceptions.CantDecomposeException;
 import sequences_10_30.exceptions.OutOfBoundsException;
+import sequences_10_30.gui.MainFrame;
 import sequences_10_30.printer.Printer;
 import sequences_10_30.printer.PrinterFile;
 import sequences_10_30.printer.PrinterStdOut;
@@ -18,6 +19,13 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainFrame().setVisible(true);
+            }
+        });
+        
         Printer printerStdOut = new PrinterStdOut();
         Printer printerFile = new PrinterFile("integers.txt");
 
