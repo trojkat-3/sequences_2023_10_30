@@ -62,6 +62,10 @@ abstract public class Sequence {
         initialize();
     }
     
+    public int getMax(){
+        return max;
+    }
+    
     public ArrayList<Integer> getSequence(){
         return sequence;
     }

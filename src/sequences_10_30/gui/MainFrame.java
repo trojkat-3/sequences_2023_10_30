@@ -7,6 +7,8 @@ package sequences_10_30.gui;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import sequences_10_30.printer.Printer;
+import sequences_10_30.printer.PrinterDummy;
 import sequences_10_30.sequence.Fibonacci;
 import sequences_10_30.sequence.Integers;
 import sequences_10_30.sequence.Primes;
@@ -18,26 +20,32 @@ import sequences_10_30.sequence.Squares;
  * @author xenon
  */
 public class MainFrame extends javax.swing.JFrame {
-    
-    private Sequence currentSq=null;
-    
+
+    private Sequence currentSq = null;
+    private Printer printer = new PrinterDummy();
+
     class ComboItem {
+
         Sequence sq;
-        
-        public ComboItem(Sequence sq){
-            this.sq=sq;
+
+        public ComboItem(Sequence sq) {
+            this.sq = sq;
         }
-        
-        Sequence getSequence(){
+
+        Sequence getSequence() {
             return sq;
         }
-        
-        public String toString(){
+
+        public String toString() {
             return sq.getName();
         }
     }
-    
-    private void lockSequence(boolean lock){
+
+    private void setMaxLabel() {
+        jLabelMax.setText(Integer.toString(currentSq.getMax()));
+    }
+
+    private void lockSequence(boolean lock) {
         //Squence choice
         jComboBox1.setEnabled(!lock);
         jButtonSelect.setEnabled(!lock);
@@ -58,13 +66,13 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        
-        ArrayList<ComboItem> sqList=new ArrayList<>();
+
+        ArrayList<ComboItem> sqList = new ArrayList<>();
         sqList.add(new ComboItem(new Integers()));
         sqList.add(new ComboItem(new Squares()));
         sqList.add(new ComboItem(new Primes()));
         sqList.add(new ComboItem(new Fibonacci()));
-        DefaultComboBoxModel comboModel=new DefaultComboBoxModel(sqList.toArray());
+        DefaultComboBoxModel comboModel = new DefaultComboBoxModel(sqList.toArray());
         jComboBox1.setModel(comboModel);
         lockSequence(false);
     }
@@ -87,7 +95,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTextFieldLimit = new javax.swing.JTextField();
         jButtonChange = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelMax = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonShow = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
@@ -117,7 +125,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabelLimit.setText("Change upper limit");
 
-        jTextFieldLimit.setText("jTextField1");
+        jTextFieldLimit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldLimitActionPerformed(evt);
+            }
+        });
 
         jButtonChange.setText("Change");
         jButtonChange.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +140,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Upper limit:");
 
-        jLabel4.setText("jLabel4");
+        jLabelMax.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,13 +158,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelLimit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonChange)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabelMax)))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,11 +181,16 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jTextFieldLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonChange)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabelMax))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jButtonShow.setText("Show elements");
+        jButtonShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonShowActionPerformed(evt);
+            }
+        });
 
         jButtonSave.setText("Save to file");
 
@@ -309,26 +326,46 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButtonQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitActionPerformed
         this.dispose();
-        
+
     }//GEN-LAST:event_jButtonQuitActionPerformed
 
     private void jButtonCreditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreditsActionPerformed
-        JOptionPane.showMessageDialog(this,"Developed by MS", "Credits", 
+        JOptionPane.showMessageDialog(this, "Developed by MS", "Credits",
                 JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonCreditsActionPerformed
 
     private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
         lockSequence(true);
-        currentSq=((ComboItem) jComboBox1.getSelectedItem()).getSequence();
+        currentSq = ((ComboItem) jComboBox1.getSelectedItem()).getSequence();
+        setMaxLabel();
     }//GEN-LAST:event_jButtonSelectActionPerformed
 
     private void jButtonChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangeActionPerformed
-        // TODO add your handling code here:
+        try {
+            int max = Integer.parseInt(jTextFieldLimit.getText());
+            currentSq.setMax(max);
+            setMaxLabel();
+        } catch (NumberFormatException ex) {
+              JOptionPane.showMessageDialog(this, "Invalid value: "+
+                      jTextFieldLimit.getText(), "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButtonChangeActionPerformed
 
     private void jButtonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetActionPerformed
         lockSequence(false);
     }//GEN-LAST:event_jButtonResetActionPerformed
+
+    private void jButtonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowActionPerformed
+        TextArea tArea = new TextArea(this, true);
+        tArea.setText(printer.print(currentSq));
+        tArea.setVisible(true);
+    }//GEN-LAST:event_jButtonShowActionPerformed
+
+    private void jTextFieldLimitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLimitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldLimitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,7 +395,6 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -374,8 +410,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelLimit;
+    private javax.swing.JLabel jLabelMax;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
