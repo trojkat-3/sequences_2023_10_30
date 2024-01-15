@@ -9,6 +9,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import sequences_10_30.printer.Printer;
 import sequences_10_30.printer.PrinterDummy;
+import sequences_10_30.printer.PrinterFile;
 import sequences_10_30.sequence.Fibonacci;
 import sequences_10_30.sequence.Integers;
 import sequences_10_30.sequence.Primes;
@@ -193,6 +194,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButtonSave.setText("Save to file");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
 
         jTextFieldDecompose.setText("jTextField2");
 
@@ -366,6 +372,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void jTextFieldLimitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLimitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldLimitActionPerformed
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        String filename=JOptionPane.showInputDialog(this, 
+                "Please input a filename","sequences.txt");
+        Printer printerFile=new PrinterFile(filename);
+        printerFile.print(currentSq);
+    }//GEN-LAST:event_jButtonSaveActionPerformed
 
     /**
      * @param args the command line arguments
